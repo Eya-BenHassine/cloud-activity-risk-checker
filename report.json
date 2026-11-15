@@ -1,0 +1,75 @@
+{
+  "total_events": 20,
+  "total_findings": 8,
+  "findings_per_risk": {
+    "LOW": 4,
+    "MEDIUM": 1,
+    "HIGH": 3
+  },
+  "findings": [
+    {
+      "time": "2026-11-10T09:15:01Z",
+      "user": "admin",
+      "ip": "192.0.2.50",
+      "event": "ConsoleLogin",
+      "reason": "Failed console login",
+      "risk": "LOW"
+    },
+    {
+      "time": "2026-11-10T09:15:22Z",
+      "user": "admin",
+      "ip": "192.0.2.50",
+      "event": "ConsoleLogin",
+      "reason": "Failed console login",
+      "risk": "LOW"
+    },
+    {
+      "time": "2026-11-10T09:15:47Z",
+      "user": "admin",
+      "ip": "192.0.2.50",
+      "event": "ConsoleLogin",
+      "reason": "Failed console login",
+      "risk": "LOW"
+    },
+    {
+      "time": "2026-11-10T10:20:33Z",
+      "user": "bob",
+      "ip": "198.51.100.77",
+      "event": "ConsoleLogin",
+      "reason": "Login without MFA",
+      "risk": "MEDIUM"
+    },
+    {
+      "time": "2026-11-10T12:45:19Z",
+      "user": "root",
+      "ip": "192.0.2.15",
+      "event": "ListUsers",
+      "reason": "Root account activity",
+      "risk": "HIGH"
+    },
+    {
+      "time": "2026-11-10T12:47:02Z",
+      "user": "root",
+      "ip": "192.0.2.15",
+      "event": "CreateAccessKey",
+      "reason": "Root account activity",
+      "risk": "HIGH"
+    },
+    {
+      "time": "2026-11-10T13:12:58Z",
+      "user": "admin",
+      "ip": "192.0.2.60",
+      "event": "StopLogging",
+      "reason": "CloudTrail logging stopped",
+      "risk": "HIGH"
+    },
+    {
+      "time": "2026-11-10T14:30:27Z",
+      "user": "alice",
+      "ip": "203.0.113.99",
+      "event": "DescribeInstances",
+      "reason": "Region used only once",
+      "risk": "LOW"
+    }
+  ]
+}

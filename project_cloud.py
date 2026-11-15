@@ -95,6 +95,23 @@ def write_csv(findings, path):
             writer.writerow(finding)              # one row per finding
 
 
+def build_summary(events, findings):
+    """Return a summary of the analysis."""
+    summary = {
+        "total_events": len(events),
+        "total_findings": len(findings),
+        "findings_per_risk": count_by_key(findings, "risk"),
+        "findings": findings,
+    }
+    return summary
+
+
+def write_json(summary, path):
+    """Write the summary in a JSON file."""
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)           # indent makes it readable
+
+
 def main():
     """Run the program."""
     events = load_events("cloudtrail_sample.json")
@@ -111,6 +128,9 @@ def main():
     print(f"Number of findings: {len(findings)}")
     write_csv(findings, "findings.csv")
     print("Findings saved in findings.csv")
+    summary = build_summary(events, findings)
+    write_json(summary, "report.json")
+    print("Report saved in report.json")
 
 
 if __name__ == "__main__":
