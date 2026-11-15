@@ -1,0 +1,158 @@
+{
+  "Records": [
+    {
+      "eventTime": "2026-11-10T08:01:12Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.10",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"},
+      "responseElements": {"ConsoleLogin": "Success"},
+      "additionalEventData": {"MFAUsed": "Yes"}
+    },
+    {
+      "eventTime": "2026-11-10T08:03:45Z",
+      "eventName": "ListBuckets",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.10",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"}
+    },
+    {
+      "eventTime": "2026-11-10T08:05:20Z",
+      "eventName": "GetObject",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.10",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"}
+    },
+    {
+      "eventTime": "2026-11-10T08:30:02Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "eu-west-1",
+      "sourceIPAddress": "198.51.100.20",
+      "userIdentity": {"type": "IAMUser", "userName": "bob"},
+      "responseElements": {"ConsoleLogin": "Success"},
+      "additionalEventData": {"MFAUsed": "Yes"}
+    },
+    {
+      "eventTime": "2026-11-10T08:32:18Z",
+      "eventName": "DescribeInstances",
+      "awsRegion": "eu-west-1",
+      "sourceIPAddress": "198.51.100.20",
+      "userIdentity": {"type": "IAMUser", "userName": "bob"}
+    },
+    {
+      "eventTime": "2026-11-10T08:40:55Z",
+      "eventName": "GetObject",
+      "awsRegion": "eu-west-1",
+      "sourceIPAddress": "198.51.100.20",
+      "userIdentity": {"type": "IAMUser", "userName": "bob"}
+    },
+    {
+      "eventTime": "2026-11-10T09:15:01Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.50",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"},
+      "responseElements": {"ConsoleLogin": "Failure"},
+      "additionalEventData": {"MFAUsed": "No"}
+    },
+    {
+      "eventTime": "2026-11-10T09:15:22Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.50",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"},
+      "responseElements": {"ConsoleLogin": "Failure"},
+      "additionalEventData": {"MFAUsed": "No"}
+    },
+    {
+      "eventTime": "2026-11-10T09:15:47Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.50",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"},
+      "responseElements": {"ConsoleLogin": "Failure"},
+      "additionalEventData": {"MFAUsed": "No"}
+    },
+    {
+      "eventTime": "2026-11-10T10:02:10Z",
+      "eventName": "ListBuckets",
+      "awsRegion": "eu-west-1",
+      "sourceIPAddress": "198.51.100.20",
+      "userIdentity": {"type": "IAMUser", "userName": "bob"}
+    },
+    {
+      "eventTime": "2026-11-10T10:20:33Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "198.51.100.77",
+      "userIdentity": {"type": "IAMUser", "userName": "bob"},
+      "responseElements": {"ConsoleLogin": "Success"},
+      "additionalEventData": {"MFAUsed": "No"}
+    },
+    {
+      "eventTime": "2026-11-10T11:00:05Z",
+      "eventName": "DescribeInstances",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.10",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"}
+    },
+    {
+      "eventTime": "2026-11-10T12:45:19Z",
+      "eventName": "ListUsers",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.15",
+      "userIdentity": {"type": "Root"}
+    },
+    {
+      "eventTime": "2026-11-10T12:47:02Z",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.15",
+      "userIdentity": {"type": "Root"}
+    },
+    {
+      "eventTime": "2026-11-10T13:10:40Z",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.60",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"},
+      "responseElements": {"ConsoleLogin": "Success"},
+      "additionalEventData": {"MFAUsed": "Yes"}
+    },
+    {
+      "eventTime": "2026-11-10T13:12:58Z",
+      "eventName": "StopLogging",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.60",
+      "userIdentity": {"type": "IAMUser", "userName": "admin"}
+    },
+    {
+      "eventTime": "2026-11-10T14:05:11Z",
+      "eventName": "GetObject",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.10",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"}
+    },
+    {
+      "eventTime": "2026-11-10T14:30:27Z",
+      "eventName": "DescribeInstances",
+      "awsRegion": "ap-southeast-2",
+      "sourceIPAddress": "203.0.113.99",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"}
+    },
+    {
+      "eventTime": "2026-11-10T15:00:44Z",
+      "eventName": "DescribeInstances",
+      "awsRegion": "eu-west-1",
+      "sourceIPAddress": "198.51.100.20",
+      "userIdentity": {"type": "IAMUser", "userName": "bob"}
+    },
+    {
+      "eventTime": "2026-11-10T16:20:09Z",
+      "eventName": "ListBuckets",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.10",
+      "userIdentity": {"type": "IAMUser", "userName": "alice"}
+    }
+  ]
+}
