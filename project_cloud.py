@@ -4,6 +4,7 @@ import csv
 INPUT_FILE = "cloudtrail_sample.json"             # read only
 CSV_FILE = "findings.csv"
 JSON_FILE = "report.json"
+FAILED_LOGIN_LIMIT = 3                            # failed logins before alert
 
 
 def load_events(path):
@@ -61,10 +62,40 @@ def get_risk(reason):
         "CloudTrail logging stopped": "HIGH",
         "Root account activity": "HIGH",
         "Login without MFA": "MEDIUM",
+        "Possible brute force": "MEDIUM",
         "Failed console login": "LOW",
         "Region used only once": "LOW",
     }
     return levels.get(reason, "LOW")              # LOW if reason not in the list
+
+
+def make_finding(record, reason):
+    """Return one finding dictionary for an event and a reason."""
+    finding = {
+        "time": record.get("eventTime", ""),
+        "user": get_user(record),
+        "ip": record.get("sourceIPAddress", ""),
+        "event": record.get("eventName", ""),
+        "reason": reason,
+        "risk": get_risk(reason),
+    }
+    return finding
+
+
+def find_brute_force(events):
+    """Return one finding per IP with too many failed logins."""
+    failures = {}
+    last_failure = {}
+    for record in events:
+        if "Failed console login" in check_event(record):
+            ip = record.get("sourceIPAddress", "unknown")
+            failures[ip] = failures.get(ip, 0) + 1    # count per IP
+            last_failure[ip] = record                 # keep the last one
+    findings = []
+    for ip in failures:
+        if failures[ip] >= FAILED_LOGIN_LIMIT:
+            findings.append(make_finding(last_failure[ip], "Possible brute force"))
+    return findings
 
 
 def build_findings(events):
@@ -77,15 +108,9 @@ def build_findings(events):
         if regions.get(region) == 1:
             reasons.append("Region used only once")   # rare region
         for reason in reasons:
-            finding = {
-                "time": record.get("eventTime", ""),
-                "user": get_user(record),
-                "ip": record.get("sourceIPAddress", ""),
-                "event": record.get("eventName", ""),
-                "reason": reason,
-                "risk": get_risk(reason),
-            }
-            findings.append(finding)              # one finding per reason
+            findings.append(make_finding(record, reason))  # one finding per reason
+    for finding in find_brute_force(events):
+        findings.append(finding)                  # one alert per IP
     return findings
 
 

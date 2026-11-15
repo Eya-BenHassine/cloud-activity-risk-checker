@@ -1,9 +1,9 @@
 {
   "total_events": 20,
-  "total_findings": 8,
+  "total_findings": 9,
   "findings_per_risk": {
     "LOW": 4,
-    "MEDIUM": 1,
+    "MEDIUM": 2,
     "HIGH": 3
   },
   "findings": [
@@ -70,6 +70,14 @@
       "event": "DescribeInstances",
       "reason": "Region used only once",
       "risk": "LOW"
+    },
+    {
+      "time": "2026-11-10T09:15:47Z",
+      "user": "admin",
+      "ip": "192.0.2.50",
+      "event": "ConsoleLogin",
+      "reason": "Possible brute force",
+      "risk": "MEDIUM"
     }
   ]
 }

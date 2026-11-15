@@ -13,6 +13,7 @@ It flags these events:
 | CloudTrail logging stopped | eventName is StopLogging                            | HIGH   |
 | Root account activity      | userIdentity type is Root                           | HIGH   |
 | Login without MFA          | successful ConsoleLogin with MFAUsed "No"           | MEDIUM |
+| Possible brute force       | 3 or more failed ConsoleLogin from the same IP      | MEDIUM |
 | Failed console login       | ConsoleLogin with result "Failure"                  | LOW    |
 | Region used only once      | the event's region appears only one time in the log | LOW    |
 
@@ -57,7 +58,7 @@ No events to analyse.
 ## Limits
 
 - The input is a simplified CloudTrail format, not a full real export (real logs can be split in many gzip files).
-- The rules are simple and fixed in the code. There are no thresholds, for example 3 failed logins are reported as 3 separate LOW findings, not as one brute force alert.
+- The rules are simple and fixed in the code. The brute force limit (`FAILED_LOGIN_LIMIT`, 3 by default) does not look at time, so 3 failures spread over several days also give an alert.
 - "Region used only once" depends on the size of the log: in a small log, a normal region can look rare.
 - The risk levels are a personal choice for this project, not an official scale.
 - The whole file is loaded in memory, so very large logs are not supported.

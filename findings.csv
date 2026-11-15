@@ -7,3 +7,4 @@ time,user,ip,event,reason,risk
 2026-11-10T12:47:02Z,root,192.0.2.15,CreateAccessKey,Root account activity,HIGH
 2026-11-10T13:12:58Z,admin,192.0.2.60,StopLogging,CloudTrail logging stopped,HIGH
 2026-11-10T14:30:27Z,alice,203.0.113.99,DescribeInstances,Region used only once,LOW
+2026-11-10T09:15:47Z,admin,192.0.2.50,ConsoleLogin,Possible brute force,MEDIUM
