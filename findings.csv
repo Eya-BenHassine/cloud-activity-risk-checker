@@ -6,3 +6,4 @@ time,user,ip,event,reason
 2026-11-10T12:45:19Z,root,192.0.2.15,ListUsers,Root account activity
 2026-11-10T12:47:02Z,root,192.0.2.15,CreateAccessKey,Root account activity
 2026-11-10T13:12:58Z,admin,192.0.2.60,StopLogging,CloudTrail logging stopped
+2026-11-10T14:30:27Z,alice,203.0.113.99,DescribeInstances,Region used only once

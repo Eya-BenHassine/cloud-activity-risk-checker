@@ -42,11 +42,25 @@ def check_event(record):
     return reasons
 
 
+def count_by_key(events, key):
+    """Count how many times each value of a key appears."""
+    counts = {}
+    for record in events:
+        value = record.get(key, "unknown")
+        counts[value] = counts.get(value, 0) + 1  # start at 0 if new value
+    return counts
+
+
 def build_findings(events):
     """Return one finding per reason found in the events."""
     findings = []
+    regions = count_by_key(events, "awsRegion")
     for record in events:
-        for reason in check_event(record):
+        reasons = check_event(record)
+        region = record.get("awsRegion", "unknown")
+        if regions.get(region) == 1:
+            reasons.append("Region used only once")   # rare region
+        for reason in reasons:
             finding = {
                 "time": record.get("eventTime", ""),
                 "user": get_user(record),
@@ -72,6 +86,14 @@ def main():
     """Run the program."""
     events = load_events("cloudtrail_sample.json")
     print(f"Number of events: {len(events)}")
+    print("Events per IP:")
+    ips = count_by_key(events, "sourceIPAddress")
+    for ip in ips:
+        print(f"  {ip}: {ips[ip]}")
+    print("Events per region:")
+    regions = count_by_key(events, "awsRegion")
+    for region in regions:
+        print(f"  {region}: {regions[region]}")
     findings = build_findings(events)
     print(f"Number of findings: {len(findings)}")
     write_csv(findings, "findings.csv")
