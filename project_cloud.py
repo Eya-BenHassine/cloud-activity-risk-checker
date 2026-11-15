@@ -56,6 +56,7 @@ def build_findings(events):
             findings.append(finding)              # one finding per reason
     return findings
 
+
 def main():
     """Run the program."""
     events = load_events("cloudtrail_sample.json")
@@ -64,3 +65,7 @@ def main():
     print(f"Number of findings: {len(findings)}")
     for finding in findings:
         print(finding)                            # one finding per line
+
+
+if __name__ == "__main__":
+    main()
