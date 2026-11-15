@@ -41,15 +41,26 @@ def check_event(record):
     return reasons
 
 
+def build_findings(events):
+    """Return one finding per reason found in the events."""
+    findings = []
+    for record in events:
+        for reason in check_event(record):
+            finding = {
+                "time": record.get("eventTime", ""),
+                "user": get_user(record),
+                "ip": record.get("sourceIPAddress", ""),
+                "event": record.get("eventName", ""),
+                "reason": reason,
+            }
+            findings.append(finding)              # one finding per reason
+    return findings
+
 def main():
     """Run the program."""
     events = load_events("cloudtrail_sample.json")
     print(f"Number of events: {len(events)}")
-    for record in events:
-        reasons = check_event(record)
-        if reasons:
-            print(get_user(record), record.get("eventName"), reasons)  # risky events only
-
-
-if __name__ == "__main__":
-    main()
+    findings = build_findings(events)
+    print(f"Number of findings: {len(findings)}")
+    for finding in findings:
+        print(finding)                            # one finding per line
