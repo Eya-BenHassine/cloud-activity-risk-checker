@@ -1,4 +1,5 @@
 import json
+import csv
 
 
 def load_events(path):
@@ -57,14 +58,24 @@ def build_findings(events):
     return findings
 
 
+def write_csv(findings, path):
+    """Write the findings in a CSV file."""
+    fields = ["time", "user", "ip", "event", "reason"]
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()                      # header line
+        for finding in findings:
+            writer.writerow(finding)              # one row per finding
+
+
 def main():
     """Run the program."""
     events = load_events("cloudtrail_sample.json")
     print(f"Number of events: {len(events)}")
     findings = build_findings(events)
     print(f"Number of findings: {len(findings)}")
-    for finding in findings:
-        print(finding)                            # one finding per line
+    write_csv(findings, "findings.csv")
+    print("Findings saved in findings.csv")
 
 
 if __name__ == "__main__":
