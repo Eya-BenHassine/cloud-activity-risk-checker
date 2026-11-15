@@ -1,6 +1,10 @@
 import json
 import csv
 
+INPUT_FILE = "cloudtrail_sample.json"             # read only
+CSV_FILE = "findings.csv"
+JSON_FILE = "report.json"
+
 
 def load_events(path):
     """Read the CloudTrail JSON file and return the list of events."""
@@ -112,25 +116,29 @@ def write_json(summary, path):
         json.dump(summary, f, indent=2)           # indent makes it readable
 
 
+def print_counts(title, counts):
+    """Print a title and one line per counted value."""
+    print(title)
+    for value in counts:
+        print(f"  {value}: {counts[value]}")
+
+
 def main():
     """Run the program."""
-    events = load_events("cloudtrail_sample.json")
-    print(f"Number of events: {len(events)}")
-    print("Events per IP:")
-    ips = count_by_key(events, "sourceIPAddress")
-    for ip in ips:
-        print(f"  {ip}: {ips[ip]}")
-    print("Events per region:")
-    regions = count_by_key(events, "awsRegion")
-    for region in regions:
-        print(f"  {region}: {regions[region]}")
-    findings = build_findings(events)
-    print(f"Number of findings: {len(findings)}")
-    write_csv(findings, "findings.csv")
-    print("Findings saved in findings.csv")
+    events = load_events(INPUT_FILE)              # load
+    if not events:
+        print("No events to analyse.")
+        return                                    # stop, keep old results
+    findings = build_findings(events)             # check
     summary = build_summary(events, findings)
-    write_json(summary, "report.json")
-    print("Report saved in report.json")
+    write_csv(findings, CSV_FILE)                 # export
+    write_json(summary, JSON_FILE)
+    print(f"Events read: {summary['total_events']}")
+    print_counts("Events per IP:", count_by_key(events, "sourceIPAddress"))
+    print_counts("Events per region:", count_by_key(events, "awsRegion"))
+    print(f"Findings: {summary['total_findings']}")
+    print_counts("Findings per risk:", summary["findings_per_risk"])
+    print(f"Results saved in {CSV_FILE} and {JSON_FILE}")
 
 
 if __name__ == "__main__":
