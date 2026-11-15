@@ -51,6 +51,18 @@ def count_by_key(events, key):
     return counts
 
 
+def get_risk(reason):
+    """Return the risk level of a reason."""
+    levels = {
+        "CloudTrail logging stopped": "HIGH",
+        "Root account activity": "HIGH",
+        "Login without MFA": "MEDIUM",
+        "Failed console login": "LOW",
+        "Region used only once": "LOW",
+    }
+    return levels.get(reason, "LOW")              # LOW if reason not in the list
+
+
 def build_findings(events):
     """Return one finding per reason found in the events."""
     findings = []
@@ -67,6 +79,7 @@ def build_findings(events):
                 "ip": record.get("sourceIPAddress", ""),
                 "event": record.get("eventName", ""),
                 "reason": reason,
+                "risk": get_risk(reason),
             }
             findings.append(finding)              # one finding per reason
     return findings
@@ -74,7 +87,7 @@ def build_findings(events):
 
 def write_csv(findings, path):
     """Write the findings in a CSV file."""
-    fields = ["time", "user", "ip", "event", "reason"]
+    fields = ["time", "user", "ip", "event", "reason", "risk"]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()                      # header line

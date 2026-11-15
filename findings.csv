@@ -1,9 +1,9 @@
-time,user,ip,event,reason
-2026-11-10T09:15:01Z,admin,192.0.2.50,ConsoleLogin,Failed console login
-2026-11-10T09:15:22Z,admin,192.0.2.50,ConsoleLogin,Failed console login
-2026-11-10T09:15:47Z,admin,192.0.2.50,ConsoleLogin,Failed console login
-2026-11-10T10:20:33Z,bob,198.51.100.77,ConsoleLogin,Login without MFA
-2026-11-10T12:45:19Z,root,192.0.2.15,ListUsers,Root account activity
-2026-11-10T12:47:02Z,root,192.0.2.15,CreateAccessKey,Root account activity
-2026-11-10T13:12:58Z,admin,192.0.2.60,StopLogging,CloudTrail logging stopped
-2026-11-10T14:30:27Z,alice,203.0.113.99,DescribeInstances,Region used only once
+time,user,ip,event,reason,risk
+2026-11-10T09:15:01Z,admin,192.0.2.50,ConsoleLogin,Failed console login,LOW
+2026-11-10T09:15:22Z,admin,192.0.2.50,ConsoleLogin,Failed console login,LOW
+2026-11-10T09:15:47Z,admin,192.0.2.50,ConsoleLogin,Failed console login,LOW
+2026-11-10T10:20:33Z,bob,198.51.100.77,ConsoleLogin,Login without MFA,MEDIUM
+2026-11-10T12:45:19Z,root,192.0.2.15,ListUsers,Root account activity,HIGH
+2026-11-10T12:47:02Z,root,192.0.2.15,CreateAccessKey,Root account activity,HIGH
+2026-11-10T13:12:58Z,admin,192.0.2.60,StopLogging,CloudTrail logging stopped,HIGH
+2026-11-10T14:30:27Z,alice,203.0.113.99,DescribeInstances,Region used only once,LOW
