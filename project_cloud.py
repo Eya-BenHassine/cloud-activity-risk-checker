@@ -100,7 +100,7 @@ def find_brute_force(events):
     for ip in failures:
         if failures[ip] >= FAILED_LOGIN_LIMIT:
             findings.append(make_finding(last_failure[ip], "Possible brute force"))
-    return findings
+    return findings 
 
 # Build the findings list (put it all together and return every finding)
 def build_findings(events):
@@ -122,7 +122,7 @@ def build_findings(events):
 def write_csv(findings, path):
     
     fields = ["time", "user", "ip", "event", "reason", "risk"]
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:   # Writes one CSV row per finding. DictWriter puts each dictionary value under the column with the same name. newline="" stops empty lines on Windows.
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()                      # header line
         for finding in findings:
@@ -130,7 +130,7 @@ def write_csv(findings, path):
 
 # Build the summary dictionary
 def build_summary(events, findings):
-    """Return a summary of the analysis."""
+    """Return a summary of the analysis."""  
     summary = {
         "total_events": len(events),
         "total_findings": len(findings),
@@ -143,7 +143,7 @@ def build_summary(events, findings):
 def write_json(summary, path):
     """Write the summary in a JSON file."""
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2)           # indent makes it readable
+        json.dump(summary, f, indent=2)           # Writes the summary as JSON. indent=2 makes it readable by humans.
 
 # Print the counts of values in a dictionary
 def print_counts(title, counts):
@@ -171,6 +171,6 @@ def main():
     print(f"Results saved in {CSV_FILE} and {JSON_FILE}")
     print_counts("Events per name:", count_by_key(events, "eventName"))
 
-
+# __name__ equals "__main__" only when the file is run directly, so main() starts when we run the script, but not when another file imports its functions.
 if __name__ == "__main__":
     main()
