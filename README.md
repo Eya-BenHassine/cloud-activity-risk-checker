@@ -1,6 +1,6 @@
 # Cloud Activity Risk Checker
 
-Course project, M1 Cybersecurity.
+Course project, Cybersecurity.
 
 ## What the script does
 
